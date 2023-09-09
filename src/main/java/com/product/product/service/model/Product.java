@@ -6,62 +6,53 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @Entity
-@Table(name="amazon_products")
+@Table(name="products")
 @AllArgsConstructor
 @NoArgsConstructor
 
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(length = 255)
-    private String product_id;
+    @Column(name = "product_id", length = 255)
+    private String productId;
 
-    @Column(columnDefinition="TEXT")
-    private String product_name;
+    @Column(name = "product_name", columnDefinition = "TEXT")
+    private String productName;
 
-    @Column(columnDefinition="TEXT")
+    @Column(name = "category", columnDefinition = "TEXT")
     private String category;
 
-    @Column(length = 255)
-    private String discounted_price;
+    @Column(name = "discounted_price", length = 255)
+    private String discountedPrice;
 
-    @Column(length = 255)
-    private String actual_price;
+    @Column(name = "actual_price", length = 255)
+    private String actualPrice;
 
-    @Column(length = 255)
-    private String discount_percentage;
+    @Column(name = "discount_percentage", length = 255)
+    private String discountPercentage;
 
+    @Column(name = "rating")
+    private Float rating;
 
-    private float rating;
+    @Column(name = "rating_count")
+    private Long ratingCount;
 
-    @Column(columnDefinition = "bigint")
-    private Long rating_count;
+    @Column(name = "about_product", columnDefinition = "TEXT")
+    private String aboutProduct;
 
-    @Column(columnDefinition="TEXT")
-    private String about_product;
+    @Column(name = "img_link", columnDefinition = "TEXT")
+    private String imgLink;
 
-    @Column(columnDefinition="TEXT")
-    private String user_id;
+    @Column(name = "product_link", columnDefinition = "TEXT")
+    private String productLink;
 
-    @Column(columnDefinition="TEXT")
-    private String user_name;
-
-    @Column(columnDefinition="TEXT")
-    private String review_id;
-
-    @Column(columnDefinition="TEXT")
-    private String review_title;
-
-    @Column(columnDefinition="TEXT")
-    private String review_content;
-
-    @Column(columnDefinition="TEXT")
-    private String img_link;
-
-    @Column(columnDefinition="TEXT")
-    private String product_link;
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Review> reviews = new ArrayList<>();
 }
 
 
