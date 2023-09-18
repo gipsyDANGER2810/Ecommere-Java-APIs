@@ -4,12 +4,16 @@ import com.product.product.service.model.Product;
 import com.product.product.service.service.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE, RequestMethod.PUT})
@@ -30,13 +34,26 @@ public class productController {
     }
 
     @GetMapping("/category")
-    public ResponseEntity<List<Product>> getProductsByCategory(@RequestParam String category) {
-        List<Product> products = productService.findByCategory(category);
+    public ResponseEntity<Page<Product>> getProductsByCategory(
+            @RequestParam String category,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+
+        Pageable pageable = PageRequest.of(page, size);
+
+        Page<Product> products = productService.findByCategory(category, pageable);
         return ResponseEntity.ok(products);
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<Product> getProductById(@PathVariable("id") String id){
         return new ResponseEntity<Product>(productService.getProductById(id),HttpStatus.OK);
+    }
+
+    @PostMapping("/details")
+    public ResponseEntity<List<Product>> getProductsByIds(@RequestBody List<String> productIds) {
+        List<Product> products = productService.getProductsbyId(productIds);
+        return ResponseEntity.ok(products);
     }
 
     @PutMapping("/{id}")

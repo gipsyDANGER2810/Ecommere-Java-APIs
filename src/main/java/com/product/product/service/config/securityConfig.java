@@ -63,7 +63,11 @@ public class securityConfig {
                 .authorizeHttpRequests(auth ->{
                         auth.requestMatchers("/auth/**").permitAll();
                         auth.requestMatchers("/api/**").permitAll();
+                        auth.requestMatchers("/api/review").permitAll();
+                        auth.requestMatchers("/admin/encode").permitAll();
                         auth.requestMatchers("/api/customer/**").permitAll();
+                        auth.requestMatchers("/api/products/details").permitAll();
+                        auth.requestMatchers("/api/products/category").permitAll();
                         auth.anyRequest().authenticated();
                 })
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> {

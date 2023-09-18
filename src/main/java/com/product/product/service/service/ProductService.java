@@ -10,7 +10,7 @@ public interface ProductService {
     Product saveProduct(Product product);
 
     List<Product> getAllProducts();
-    List<Product> findByCategory(String category);
+    Page<Product> findByCategory(String category, Pageable pageable);
     Product getProductById(String id);
 
     Product updateProduct(Product product, String id);
@@ -18,6 +18,8 @@ public interface ProductService {
     void deleteProduct(String id);
 
     Page<Product> findAllProducts(Pageable pageable);
+
+    List<Product> getProductsbyId(List<String> productIds);
 
 
 }

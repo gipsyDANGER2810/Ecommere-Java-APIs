@@ -23,6 +23,16 @@ public class ReviewDTO {
         this.reviewContent = reviewContent;
     }
 
+    public ReviewDTO( String userId, String productId, String reviewTitle, String reviewContent) {
+
+        this.userId = userId;
+        this.productId = productId;
+        this.reviewTitle = reviewTitle;
+        this.reviewContent = reviewContent;
+    }
+
+
+
     // Getters and setters
 
     public String getReviewId() {

@@ -1,5 +1,6 @@
 package com.product.product.service.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -31,6 +32,7 @@ public class Customer implements UserDetails {
     private String password;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference(value="user-review")
     private List<Review> reviews = new ArrayList<>();
 
     public Customer(String userId , String username , String password){

@@ -34,9 +34,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> findByCategory(String category) {
-        return productRepository.findByCategory(category);
+    public Page<Product> findByCategory(String category, Pageable pageable) {
+        return productRepository.findByCategoryLike(category, pageable);
     }
+
+
 
     @Override
     public Product getProductById(String id) {
@@ -78,6 +80,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Page<Product> findAllProducts(Pageable pageable) {
         return productRepository.findAll(pageable);
+    }
+
+    @Override
+    public List<Product> getProductsbyId(List<String> productIds) {
+        return productRepository.findAllById(productIds);
     }
 
 

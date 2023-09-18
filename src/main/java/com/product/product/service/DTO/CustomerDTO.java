@@ -31,7 +31,7 @@ public class CustomerDTO {
         return new ReviewDTO(
                 review.getReview_id(),
                 review.getCustomer().getUserId(),
-                review.getProduct().getProductId(),
+                review.getProduct().getProduct_id(),
                 review.getReview_title(),
                 review.getReview_content()
         );

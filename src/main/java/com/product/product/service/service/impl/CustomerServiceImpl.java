@@ -59,16 +59,10 @@ public class CustomerServiceImpl implements CustomerService {
 
         Customer customer = customerRepository.findByIdWithReviews(id).orElseThrow(() ->
                 new ResourceNotFoundException("Customer", "Id", id));
-////        System.out.println("JPQL RESULT : \n"+ customerRepository.findByIdWithReviews(id).toString());
-//        if (customer != null) {
-//            // Hibernate should automatically fetch the reviews for the customer
-//            // because of the @OneToMany mapping.
-//            // However, if the reviews are not being loaded, you can force the fetch like:
-//            customer.getReviews().size();
-//            System.out.println(customer.getReviews());
-//        }
+
+
+
         return customer;
-//        return customerRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Customer", "Id", id));
     }
 
     @Override
